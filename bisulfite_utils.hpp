@@ -30,17 +30,16 @@
 
 namespace bsflags {
   static const sam_rec::flags_t a_rich = 0x1000;
+  constexpr bool
+  is_a_rich(const sam_rec::flags_t flags) {
+    return (flags & bsflags::a_rich) != 0;
+  }
 };
 
 enum conversion_type { t_rich = false, a_rich = true };
 constexpr conversion_type
 flip_conv(const conversion_type conv) {
   return conv == t_rich ? a_rich : t_rich;
-}
-
-constexpr bool
-is_a_rich(const sam_rec::flags_t flags) {
-  return (flags & bsflags::a_rich) != 0;
 }
 
 void
