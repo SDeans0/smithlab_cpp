@@ -28,6 +28,21 @@
 #include <string>
 #include <random>
 
+namespace bsflags {
+  static const sam_rec::flags_t a_rich = 0x1000;
+};
+
+enum conversion_type { t_rich = false, a_rich = true };
+constexpr conversion_type
+flip_conv(const conversion_type conv) {
+  return conv == t_rich ? a_rich : t_rich;
+}
+
+constexpr bool
+is_a_rich(const sam_rec::flags_t flags) {
+  return (flags & bsflags::a_rich) != 0;
+}
+
 void
 bisulfite_treatment(std::mt19937 &generator, std::string &seq, 
 		    double bs_rate = 1.0, double meth_rate = 0.0);
